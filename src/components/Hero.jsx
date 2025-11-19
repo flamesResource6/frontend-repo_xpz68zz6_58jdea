@@ -11,6 +11,10 @@ export default function Hero() {
   const hudOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
   const vignetteOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.4, 0.2, 0.2, 0.5])
 
+  // Ambient parallax accents (M-stripes inspired)
+  const parallaxX = useTransform(scrollYProgress, [0, 1], ['0%', '8%'])
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0%', '-6%'])
+
   // Stage captions (fade between sections)
   const stage1Opacity = useTransform(scrollYProgress, [0.02, 0.12, 0.22], [0, 1, 0])
   const stage1Y = useTransform(scrollYProgress, [0.02, 0.12, 0.22], [20, 0, -20])
@@ -25,7 +29,7 @@ export default function Hero() {
   const interiorSceneUrl = 'https://prod.spline.design/m8wpIQzXWhEh9Yek/scene.splinecode'
 
   return (
-    <section id="home" className="relative w-full bg-slate-950">
+    <section id="cockpit" className="relative w-full bg-slate-950">
       {/* 3-scene scroll length */}
       <div ref={containerRef} className="relative h-[300vh] w-full">
         {/* Pinned 3D cockpit */}
@@ -45,6 +49,16 @@ export default function Hero() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.6)_100%)]" />
           </motion.div>
 
+          {/* M ambient lighting stripes with slight parallax */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -left-24 top-16 z-0 h-72 w-[140%] -skew-y-6 opacity-35 mix-blend-screen"
+            style={{ x: parallaxX, y: parallaxY }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0E6FFF] via-[#00ADEF] to-transparent" />
+            <div className="absolute inset-0 -translate-y-2 bg-gradient-to-r from-[#E60026] via-transparent to-transparent opacity-80" />
+          </motion.div>
+
           {/* HUD overlay that eases out as you scroll */}
           <motion.div
             className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-4 sm:px-6 lg:px-8"
@@ -58,7 +72,7 @@ export default function Hero() {
                 Step inside the cockpit
               </h1>
               <p className="mt-6 max-w-prose text-lg text-slate-300">
-                A scroll-driven portfolio that guides you through the car interior — from the wheel to the console to ambient systems.
+                A scroll-driven portfolio that guides you through the M-inspired interior — from the wheel to the console to ambient systems.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#projects" className="rounded-xl bg-gradient-to-br from-red-600 to-red-500 px-6 py-3 font-semibold text-white shadow-lg shadow-red-500/30 ring-1 ring-white/10 transition hover:brightness-110">
@@ -79,7 +93,7 @@ export default function Hero() {
             >
               <p className="text-sm font-semibold tracking-wider text-red-400">STAGE 01 • DRIVER FOCUS</p>
               <h3 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Precision UI, race-grade performance</h3>
-              <p className="mt-2 text-slate-300">Every component tuned for speed, accessibility, and clarity.</p>
+              <p className="mt-2 text-slate-300">Flat-bottom wheel, paddle shifters, and digital M-cluster come to life.</p>
             </motion.div>
 
             <motion.div
@@ -88,7 +102,7 @@ export default function Hero() {
             >
               <p className="text-sm font-semibold tracking-wider text-red-400">STAGE 02 • CENTER CONSOLE</p>
               <h3 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Controls engineered for flow</h3>
-              <p className="mt-2 text-slate-300">Thoughtful interactions, smooth motion, zero friction.</p>
+              <p className="mt-2 text-slate-300">Sculpted M-sport bucket seats, Alcantara textures, contrast stitching.</p>
             </motion.div>
 
             <motion.div
@@ -97,8 +111,21 @@ export default function Hero() {
             >
               <p className="text-sm font-semibold tracking-wider text-red-400">STAGE 03 • AMBIENT SYSTEMS</p>
               <h3 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Immersive details that glow</h3>
-              <p className="mt-2 text-slate-300">Subtle lighting, tactile feedback, and refined polish.</p>
+              <p className="mt-2 text-slate-300">Illuminated M badges, RPM-focused animations, and red–blue ambient light.</p>
             </motion.div>
+          </div>
+
+          {/* Speed-style light trails */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            {[...Array(4)].map((_, i) => (
+              <motion.span
+                key={i}
+                className="absolute top-[70%] h-0.5 w-32 -skew-x-12 bg-gradient-to-r from-transparent via-red-500/70 to-transparent blur-sm"
+                style={{ left: `${-20 + i * 25}%` }}
+                animate={{ x: ['-10%', '120%'] }}
+                transition={{ duration: 2 + i * 0.3, repeat: Infinity, ease: 'easeOut', delay: i * 0.25 }}
+              />
+            ))}
           </div>
 
           {/* Scroll cue */}

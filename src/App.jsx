@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar'
+import TelemetryDashboard from './components/TelemetryDashboard'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import About from './components/About'
@@ -9,6 +10,7 @@ function App() {
     <div className="min-h-screen bg-slate-950">
       <Navbar />
       <main className="relative">
+        <TelemetryDashboard />
         <Hero />
         <Projects />
         <About />
