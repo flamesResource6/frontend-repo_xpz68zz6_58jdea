@@ -3,24 +3,33 @@ import TelemetryDashboard from './components/TelemetryDashboard'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import About from './components/About'
+import Experience from './components/Experience'
+import Gallery from './components/Gallery'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-950">
       <Navbar />
       <main className="relative">
+        {/* 1️⃣ HERO – Ignition On (dashboard telemetry) */}
         <TelemetryDashboard />
+        {/* Scroll-driven cockpit reveal */}
         <Hero />
+        {/* 3️⃣ PROJECTS – Track Mode */}
         <Projects />
+        {/* 2️⃣ ABOUT – Driver Profile */}
         <About />
+        {/* 4️⃣ EXPERIENCE / SKILLS – Performance Stats */}
+        <Experience />
+        {/* 5️⃣ GALLERY – Inside the Machine */}
+        <Gallery />
+        {/* 6️⃣ CONTACT – Pit Stop */}
         <Contact />
       </main>
-      <footer className="bg-slate-950 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-10 text-center text-slate-400">
-          <p>© {new Date().getFullYear()} Drivefolio — Built with speed and precision.</p>
-        </div>
-      </footer>
+      {/* 7️⃣ FOOTER – Underbody Glow */}
+      <Footer />
     </div>
   )
 }
